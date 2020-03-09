@@ -142,7 +142,7 @@ lcd_init:
   lda #%10101010 ; debug line
   lda #(%00100000 | EN)  ; 4-bit operation
   sta PORTB
-  lda #0
+  and #%11110000
   sta PORTB       ; Clear EN
   rts 
 
@@ -150,7 +150,7 @@ lcdcmd:
   tax           ; transfer A to X
   ora #EN       ; set enable flag
   sta PORTB     ; send to lcd
-  lda #0
+  and #%11110000
   sta PORTB     
   txa           ; transfer X to X
   asl           ; shift left
@@ -159,7 +159,7 @@ lcdcmd:
   asl           ; shift left
   ora #EN       ; set enable flag
   sta PORTB
-  lda #0
+  and #%11110000
   sta PORTB
   rts
 
@@ -167,7 +167,7 @@ write:
   tax             ; transfer A to X
   ora #(EN | RS)  ; set enable flag
   sta PORTB       ; send to lcd
-  lda #0
+  and #%11110000
   sta PORTB     
   txa             ; transfer X to A
   asl             ; shift left
@@ -176,7 +176,7 @@ write:
   asl             ; shift left
   ora #(EN | RS)  ; set enable flag
   sta PORTB
-  lda #0
+  and #%11110000
   sta PORTB
   rts
    
